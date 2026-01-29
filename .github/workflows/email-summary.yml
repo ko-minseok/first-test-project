@@ -17,7 +17,7 @@ env:
   AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
   AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
   GITHUB_TOKEN: ${{ secrets.GH_PAT }}
   GITHUB_REPO: ${{ github.repository }}
   USER_EMAIL: ${{ secrets.USER_EMAIL }}

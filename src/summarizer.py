@@ -1,23 +1,23 @@
 """
-Email Summarizer using LLM (OpenAI)
+Email Summarizer using LLM (Anthropic Claude)
 """
 import os
 from datetime import datetime
 from typing import Optional
-from openai import OpenAI
+import anthropic
 
 
 class EmailSummarizer:
     """LLM을 사용하여 이메일을 요약하는 클래스"""
 
-    def __init__(self, api_key: Optional[str] = None, model: str = "gpt-4o-mini"):
-        self.api_key = api_key or os.getenv("OPENAI_API_KEY")
+    def __init__(self, api_key: Optional[str] = None, model: str = "claude-sonnet-4-20250514"):
+        self.api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
         self.model = model
 
         if not self.api_key:
-            raise ValueError("OpenAI API key is required")
+            raise ValueError("Anthropic API key is required")
 
-        self.client = OpenAI(api_key=self.api_key)
+        self.client = anthropic.Anthropic(api_key=self.api_key)
 
     def summarize_emails(self, email_data: dict) -> str:
         """이메일 데이터를 요약하여 마크다운 형식으로 반환
@@ -69,7 +69,7 @@ class EmailSummarizer:
         return "\n".join(lines)
 
     def _call_llm(self, email_text: str, date: str) -> str:
-        """LLM API를 호출하여 요약 생성"""
+        """Claude API를 호출하여 요약 생성"""
         system_prompt = """당신은 이메일 요약 전문가입니다.
 주어진 이메일들을 분석하여 다음 형식으로 요약해주세요:
 
@@ -86,17 +86,17 @@ class EmailSummarizer:
 
 {email_text}"""
 
-        response = self.client.chat.completions.create(
+        message = self.client.messages.create(
             model=self.model,
+            max_tokens=2000,
             messages=[
-                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ],
-            temperature=0.3,
-            max_tokens=2000
+            system=system_prompt,
+            temperature=0.3
         )
 
-        return response.choices[0].message.content
+        return message.content[0].text
 
     def _format_markdown(
         self,

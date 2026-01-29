@@ -5,7 +5,7 @@
 ## 기능
 
 - Microsoft Graph API를 통한 Outlook 메일 조회 (수신/발신)
-- OpenAI GPT를 활용한 메일 내용 AI 요약
+- Anthropic Claude를 활용한 메일 내용 AI 요약
 - GitHub 저장소에 자동 업로드
 - GitHub Actions를 통한 매일 22:00(KST) 자동 실행
 
@@ -13,7 +13,7 @@
 
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   Outlook API   │────▶│  LLM (OpenAI)   │────▶│  GitHub API     │
+│   Outlook API   │────▶│  LLM (Claude)   │────▶│  GitHub API     │
 │ (Microsoft Graph)│     │   Summarizer    │     │   Uploader      │
 └─────────────────┘     └─────────────────┘     └─────────────────┘
          │                       │                       │
@@ -52,7 +52,7 @@
 자세한 설정 방법은 [SETUP.md](./SETUP.md)를 참조하세요.
 
 - Azure AD App Registration (Outlook API 접근)
-- OpenAI API 키
+- Anthropic API 키
 - GitHub Personal Access Token
 
 ### 2. 설치
@@ -115,7 +115,7 @@ python main.py --user-email user@example.com --dry-run
 
 - **Python 3.11+**
 - **MSAL** - Microsoft 인증 라이브러리
-- **OpenAI API** - GPT 모델
+- **Anthropic API** - Claude 모델
 - **PyGithub** - GitHub API
 - **GitHub Actions** - 스케줄링
 

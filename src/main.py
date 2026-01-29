@@ -123,7 +123,7 @@ def main():
         "AZURE_CLIENT_ID",
         "AZURE_CLIENT_SECRET",
         "AZURE_TENANT_ID",
-        "OPENAI_API_KEY"
+        "ANTHROPIC_API_KEY"
     ]
 
     if not args.dry_run:

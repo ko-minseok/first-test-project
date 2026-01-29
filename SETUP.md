@@ -6,7 +6,7 @@
 
 Email Summary Agent는 다음 작업을 자동으로 수행합니다:
 1. 매일 22:00(KST)에 Microsoft Outlook에서 당일 수신/발신 메일 조회
-2. OpenAI GPT를 사용하여 메일 내용 요약
+2. Anthropic Claude를 사용하여 메일 내용 요약
 3. 요약된 내용을 GitHub 저장소에 마크다운 파일로 업로드
 
 ## 사전 요구사항
@@ -14,7 +14,7 @@ Email Summary Agent는 다음 작업을 자동으로 수행합니다:
 - Python 3.11+
 - Microsoft 365 계정 (Outlook)
 - Azure 구독 (App Registration)
-- OpenAI API 키
+- Anthropic API 키
 - GitHub 계정 및 Personal Access Token
 
 ---
@@ -56,10 +56,10 @@ Email Summary Agent는 다음 작업을 자동으로 수행합니다:
 
 ---
 
-## 2. OpenAI API 키 발급
+## 2. Anthropic API 키 발급
 
-1. [OpenAI Platform](https://platform.openai.com) 접속
-2. **API Keys** > **Create new secret key**
+1. [Anthropic Console](https://console.anthropic.com) 접속
+2. **API Keys** > **Create Key**
 3. 키 복사 및 안전하게 저장
 
 ---
@@ -83,7 +83,7 @@ Email Summary Agent는 다음 작업을 자동으로 수행합니다:
 | `AZURE_CLIENT_ID` | Azure App Client ID |
 | `AZURE_CLIENT_SECRET` | Azure App Client Secret |
 | `AZURE_TENANT_ID` | Azure Tenant ID |
-| `OPENAI_API_KEY` | OpenAI API 키 |
+| `ANTHROPIC_API_KEY` | Anthropic API 키 |
 | `GH_PAT` | GitHub Personal Access Token |
 | `USER_EMAIL` | Outlook 사용자 이메일 주소 |
 
