@@ -1,0 +1,29 @@
+{
+  "id": "d811c780-6481-4f82-a6b9-97c681d66f23",
+  "name": "AI Daily Report",
+  "description": "AI/LLM/Agent 관련 최신 뉴스를 매일 아침 리포트로 전송",
+  "enabled": true,
+  "schedule": {
+    "kind": "cron",
+    "expr": "0 8 * * *",
+    "tz": "Asia/Seoul",
+    "description": "매일 오전 8시 (KST)"
+  },
+  "sessionTarget": "isolated",
+  "delivery": {
+    "channel": "telegram",
+    "target": "272192609"
+  },
+  "categories": [
+    "새로운 LLM 모델 출시",
+    "AI Agent 개발 동향",
+    "AI 서비스/제품 런칭",
+    "주요 AI 연구/논문",
+    "LLM 모델 Deprecation 일정"
+  ],
+  "format": {
+    "language": "ko",
+    "style": "bullet-points",
+    "includeSourceLinks": true
+  }
+}
