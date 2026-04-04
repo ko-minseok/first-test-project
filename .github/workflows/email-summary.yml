@@ -1,0 +1,59 @@
+name: Email Summary Agent
+
+on:
+  # 매일 22:00 KST (13:00 UTC) 실행
+  schedule:
+    - cron: '0 13 * * *'
+
+  # 수동 실행 지원
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: '조회할 날짜 (YYYY-MM-DD, 비워두면 오늘)'
+        required: false
+        default: ''
+
+env:
+  AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+  GITHUB_REPO: ${{ github.repository }}
+  USER_EMAIL: ${{ secrets.USER_EMAIL }}
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Email Summary Agent
+        working-directory: src
+        run: |
+          if [ -n "${{ github.event.inputs.target_date }}" ]; then
+            python main.py --user-email "$USER_EMAIL" --date "${{ github.event.inputs.target_date }}"
+          else
+            python main.py --user-email "$USER_EMAIL"
+          fi
+
+      - name: Report success
+        if: success()
+        run: echo "✅ Email summary has been generated and uploaded successfully!"
+
+      - name: Report failure
+        if: failure()
+        run: echo "❌ Email summary generation failed. Please check the logs."
