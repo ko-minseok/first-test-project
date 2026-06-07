@@ -1,0 +1,22 @@
+{
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "name": "Daily Standup Report",
+  "description": "팀 데일리 스탠드업을 위한 현황 리포트를 매일 아침 전송",
+  "enabled": true,
+  "schedule": {
+    "kind": "cron",
+    "expr": "0 9 * * 1-5",
+    "tz": "Asia/Seoul",
+    "description": "평일 오전 9시 (KST)"
+  },
+  "sessionTarget": "isolated",
+  "delivery": {
+    "channel": "slack",
+    "target": "#daily-standup"
+  },
+  "format": {
+    "language": "ko",
+    "style": "bullet-points",
+    "sections": ["어제 한 일", "오늘 할 일", "블로커"]
+  }
+}

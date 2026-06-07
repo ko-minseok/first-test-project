@@ -1,0 +1,22 @@
+{
+  "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "name": "Weekly Summary",
+  "description": "한 주간의 작업 요약 및 다음 주 계획을 매주 금요일 전송",
+  "enabled": true,
+  "schedule": {
+    "kind": "cron",
+    "expr": "0 17 * * 5",
+    "tz": "Asia/Seoul",
+    "description": "매주 금요일 오후 5시 (KST)"
+  },
+  "sessionTarget": "isolated",
+  "delivery": {
+    "channel": "slack",
+    "target": "#weekly-summary"
+  },
+  "format": {
+    "language": "ko",
+    "style": "structured",
+    "sections": ["이번 주 완료 사항", "진행 중인 작업", "다음 주 계획", "특이 사항"]
+  }
+}
